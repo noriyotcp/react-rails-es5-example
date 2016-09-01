@@ -1,6 +1,6 @@
 var MessageBox = React.createClass({
   getInitialState: function() {
-    return { messages: [] };
+    return { messages: [], isLoading: true };
   },
 
   componentDidMount: function() {
@@ -9,7 +9,7 @@ var MessageBox = React.createClass({
       dataType: 'json',
       cache: false,
       success: function(messages) {
-        this.setState({ messages: messages });
+        this.setState({ messages: messages, isLoading: false });
       }.bind(this),
       error: function(_xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -28,11 +28,15 @@ var MessageBox = React.createClass({
       return <MessageItem key={message.id} message={message} />
     });
 
-    return (
-      <div className="messageBox">
-        {messageItems}
-        <MessageForm onMessageSubmit={this.handleMessageSubmit}/>
-      </div>
-    );
+    if (this.state.isLoading) {
+      return <div>Now loading...</div>
+    } else {
+      return (
+        <div className="messageBox">
+          {messageItems}
+          <MessageForm onMessageSubmit={this.handleMessageSubmit}/>
+        </div>
+      );
+    }
   }
 });
