@@ -18,9 +18,19 @@ var MessageBox = React.createClass({
   },
 
   handleMessageSubmit: function(message) {
-    message.id = new Date();
-    var newMessages = this.state.messages.concat(message);
-    this.setState({ messages: newMessages });
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      type: 'POST',
+      data: message,
+      success: function(message) {
+        var newMessages = this.state.messages.concat(message);
+        this.setState({ messages: newMessages });
+      }.bind(this),
+      error: function(_xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
   },
 
   render: function() {

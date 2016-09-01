@@ -40,4 +40,8 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.react.variant = :development
+
+  # Allow networks on Cloud9
+  # http://stackoverflow.com/questions/32568556/cloud9-rails-api-challenge-allowed-network-but-still-cannot-render-console
+  config.web_console.whitelisted_ips = '0.0.0.0/0.0.0.0'
 end
