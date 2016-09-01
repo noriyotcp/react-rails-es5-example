@@ -9,6 +9,12 @@ var MessageBox = React.createClass({
     }
   },
 
+  handleMessageSubmit: function(message) {
+    message.id = new Date();
+    var newMessages = this.state.messages.concat(message);
+    this.setState({ messages: newMessages });
+  },
+
   render: function() {
     var messageItems = this.state.messages.map(function(message) {
       return <MessageItem key={message.id} message={message} />
@@ -17,7 +23,7 @@ var MessageBox = React.createClass({
     return (
       <div className="messageBox">
         {messageItems}
-        <MessageForm />
+        <MessageForm onMessageSubmit={this.handleMessageSubmit}/>
       </div>
     );
   }
