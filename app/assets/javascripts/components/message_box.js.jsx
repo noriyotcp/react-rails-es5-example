@@ -17,6 +17,7 @@ var MessageBox = React.createClass({
     return (
       <div className="messageBox">
         {messageItems}
+        <MessageForm />
       </div>
     );
   }
