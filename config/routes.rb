@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :messages, only: [:index, :create]
+  resources :messages, only: [:index, :create], format: :json
   get 'top/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
